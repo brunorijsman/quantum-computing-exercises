@@ -1,11 +1,12 @@
+import os
 import qiskit
 
-QX_CONFIG = {
-    # pylint:disable=line-too-long
-    "APItoken": "d57067d82fb2a81735d2aef295be55cdb139e98aa5176ccf5dd33451048895499bd927844ab4e00e0f14f6ca461eb0fab344014dfb4afbb1021509452bdc787e",
-    "url":"https://quantumexperience.ng.bluemix.net/api"}
+if "QX_API_TOKEN" not in os.environ:
+    print("Set environment variable QX_API_TOKEN")
+    exit(1)
+API_TOKEN = os.environ["QX_API_TOKEN"]
 
-qiskit.register(QX_CONFIG['APItoken'], QX_CONFIG['url'])
+qiskit.register(API_TOKEN, "https://quantumexperience.ng.bluemix.net/api")
 print("Registered")
 
 print("Available backends:")
